@@ -13,8 +13,8 @@ CLIENT='e09ffe6d4b22485b84e5d9fa9565f189'
 SECRET='e35e812c02e540329ac427ca143fd569'
 
 # Folders de la aplicacion
-ROOT='I:\potifydownload\descargas'
-EXECFOLDER='I:\potifydownload\descargas\_execution'
+ROOT='F:\potifydownload\descargas'
+EXECFOLDER='F:\potifydownload\descargas\_execution'
 
 # Link de spotify
 LINKROOT='https://open.spotify.com'
@@ -37,6 +37,8 @@ for directory in directories:
 # Leer los links de cada uno de los archivos       
 for file in files:
     parendirectory,openfile=file
+    if "_execution" in parendirectory:
+        continue
     print(f'{openfile}\n{parendirectory}')
     with open(openfile) as f:
 
@@ -70,9 +72,10 @@ for file in files:
                         print(f"cancion: {track.text}")
                         print(link_track)
                         
+                       
                         s = Savify(api_credentials=(CLIENT,SECRET),path_holder=path_holder,logger=log_dir)
                         s.download(link_track,'--no-check-certificate')
-
+                        
 
 ###################################################################
 #             ruta=f"spotify_dl -V -l {link[:-2]} -o {parendirectory}"
